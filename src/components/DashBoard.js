@@ -183,19 +183,29 @@ const DashBoard = () => {
   }
 
   const handleView = (password, iv, id) => {
-    const newItem = {
-      password,
-      iv,
-      id,
-    };
-    fetchApi
-      .post("/api/decryptpassword", newItem)
-      .then((res) => {
-        setItemId(id);
-        setHashedPassword(res.data.password);
-      })
-      .catch();
+    if (itemId === id) {
+      // If item ID is the same, hide the password
+      setItemId(null);
+      setHashedPassword("");
+    } else {
+      // If item ID is different, show the password
+      const newItem = {
+        password,
+        iv,
+        id,
+      };
+      fetchApi
+        .post("/api/decryptpassword", newItem)
+        .then((res) => {
+          setItemId(id);
+          setHashedPassword(res.data.password);
+        })
+        .catch((error) => {
+          console.error("Error decrypting password:", error);
+        });
+    }
   };
+
   const addPassword = () => {
     const newItem = {
       name,
@@ -240,11 +250,11 @@ const DashBoard = () => {
           {data.map((item) => (
             <InnerPasswordFields key={item._id}>
               <span>{item.name}</span>
-              <span>{itemId===item._id ? hashedpassword : "********"}</span>
+              <span>{itemId === item._id ? hashedpassword : "********"}</span>
               <span
                 onClick={() => handleView(item.password, item.iv, item._id)}
               >
-                <EyeFilled /> : <EyeInvisibleFilled />
+                {itemId !== item._id ? <EyeFilled /> : <EyeInvisibleFilled />}
               </span>
               <DeleteFilled onClick={() => onDelete(item._id)} />
             </InnerPasswordFields>
