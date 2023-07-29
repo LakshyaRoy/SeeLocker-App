@@ -9,11 +9,15 @@ const schema=mongoose.Schema({
         type: String,
         require: true,
     },
-    // userId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "User",
-    //     require: true
-    // }
+    iv: {
+        type: String,
+        require: true,
+    },
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        require: true
+    }
 });
 
 const Password=mongoose.model("Password",schema);

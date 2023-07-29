@@ -1,10 +1,11 @@
-const express=require("express");
-const mongoose=require("mongoose");
-const cors=require("cors");
-const port=8000 || process.env.PORT;
-const Password=require("./models/password-model");
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const crypto = require("crypto");
+const port = 8000 || process.env.PORT;
+const Password = require("./models/password-model");
 
-const app=express();
+const app = express();
 require("dotenv").config();
 
 // Middlewares
@@ -17,20 +18,13 @@ mongoose.connection.once("open", () => {
   console.log("Connected to the database!");
 });
 
+// Routes
+const HomeRouter = require("./routes/home-router");
+const UserRouter = require("./routes/user-router");
 
-app.post("/addPassword",(req,res)=>{
-    const {name, password}=req.body;
-    const newPassword=new Password({
-        name,
-        password
-    });
-    newPassword.save().then(res=>{
-        res.json("Successfully created!");
-    }).catch(err=>{
-        res.json(err);
-    })
+app.use("/api", HomeRouter);
+app.use("/user", UserRouter);
+
+app.listen(port, () => {
+  console.log("Server is running at", port);
 });
-
-app.listen(port,()=>{
-    console.log("Server is running at",port);
-})
