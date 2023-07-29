@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 const Password = require("../models/password-model");
 const authMiddleware = require("../middlewares/auth");
+const crypto = require("crypto");
 
 router.route("/getpasswords").get(authMiddleware, (req, res) => {
   try {
@@ -59,6 +60,24 @@ router.route("/decryptpassword").post(authMiddleware, (req, res) => {
   let decrypted = decipher.update(password, "hex", "utf8");
   decrypted += decipher.final("utf8");
   res.json({ password: decrypted });
+});
+
+router.route("/getrandom").get((req, res) => {
+  // Generate a random password of the specified length
+  function generateRandomPassword(length) {
+    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!{}_@#+[=]-$%_;'^:^';--&*()~||!";
+    const passwordBytes = crypto.randomBytes(length);
+    const passwordArray = new Array(length);
+    for (let i = 0; i < length; i++) {
+      const randomIndex = passwordBytes[i] % charset.length;
+      passwordArray[i] = charset[randomIndex];
+    }
+    return passwordArray.join("");
+  }
+
+  // Example usage
+  const randomPassword = generateRandomPassword(12); // Generate a random password of length 12
+  res.json({ Password: randomPassword });
 });
 
 router.route("/password/:Id").delete(authMiddleware, (req, res) => {
