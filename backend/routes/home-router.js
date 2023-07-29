@@ -77,7 +77,7 @@ router.route("/getrandom").get((req, res) => {
 
   // Example usage
   const randomPassword = generateRandomPassword(12); // Generate a random password of length 12
-  res.json({ Password: randomPassword });
+  res.json({ "password": randomPassword });
 });
 
 router.route("/password/:Id").delete(authMiddleware, (req, res) => {

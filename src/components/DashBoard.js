@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import { styled } from "styled-components";
 import { EyeFilled, EyeInvisibleFilled, DeleteFilled } from "@ant-design/icons";
-import axios from "axios";
 import fetchApi from "../utils/fetchApi";
 import { Navigate } from "react-router-dom";
 
@@ -175,13 +174,23 @@ const DashBoard = () => {
           console.error("Error fetching notes:", error);
         });
     }
-  }, [data]); // Empty dependency array ensures the effect runs only once on component mount
+  }, [data,token]); // Empty dependency array ensures the effect runs only once on component mount
 
   // If the user is not logged in, redirect to the login page
   if (!isLoggedIn) {
     return <Navigate to="/login" />;
   }
 
+  const generateRandomPassword=()=>{
+    fetchApi
+    .get("/api/getrandom")
+    .then((res) => {
+      setPassword(res.data.password);
+    })
+    .catch((error) => {
+      console.error("Error decrypting password:", error);
+    });
+  }
   const handleView = (password, iv, id) => {
     if (itemId === id) {
       // If item ID is the same, hide the password
@@ -241,7 +250,7 @@ const DashBoard = () => {
               autoComplete="on"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <p>Click here! To Generate Random Password </p>
+            <p onClick={generateRandomPassword}>Click here! To Generate Random Password </p>
 
             <button onClick={addPassword}>Save Password</button>
           </PasswordForm>
