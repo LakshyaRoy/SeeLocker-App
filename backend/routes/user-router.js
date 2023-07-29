@@ -60,19 +60,26 @@ router.post("/login", async (req, res) => {
 
 // Logout Route
 router.post("/logout", (req, res) => {
-  try {
-    // Get the user's token from the request headers
-    const token = req.headers.authorization;
+  // Get the user's token from the request headers
+  const token = req.headers.authorization;
 
-    // If the token is not present or is empty, the user is not logged in
-    if (!token) {
-      return res.status(401).json({ message: "User is not logged in" });
-    }
+  // If the token is not present or is empty, the user is not logged in
+  if (!token) {
+    return res.status(401).json({ message: "User is not logged in" });
+  }
+
+  try {
+    // Decode the token to get the user id
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
 
     // The token is valid, but will mark it as expired by setting its expiration to the current time
-    const expiredToken = jwt.sign({ userId: decodedToken.userId }, process.env.SECRET_KEY, {
-      expiresIn: 0,
-    });
+    const expiredToken = jwt.sign(
+      { userId: decodedToken.userId },
+      process.env.SECRET_KEY,
+      {
+        expiresIn: 0,
+      }
+    );
 
     // Send a response to the client to indicate successful logout
     res.json({ message: "User logged out successfully" });

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import NavBar from "./NavBar";
+import axios from "axios";
 
 const Container = styled.div`
   display: grid;
@@ -112,12 +113,34 @@ const SignUpForm = styled.form`
     }
   }
 `;
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+// const InputWrapper = styled.div`
+//   display: flex;
+//   flex-direction: column;
+// `;
 
 const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignup = async () => {
+    try {
+      // Send a POST request to the server with email and password
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/user/signup`,
+        {
+          email,
+          password,
+        }
+      );
+
+      // Redirect to the login page after successful sign-up
+      window.location.href = "/login";
+    } catch (error) {
+      // If sign-up fails, print the error
+      console.error("Sign-up failed:", error);
+    }
+  };
+
   return (
     <>
       <NavBar page="signup" />
@@ -131,15 +154,21 @@ const Signup = () => {
         <div>
           <SignUpForm>
             <TagLine>Save your next Password Here!</TagLine>
-            <InputWrapper>
-              <label for="email">Email</label>
-              <input type="email" placeholder="Enter your email" />
-            </InputWrapper>
-            <InputWrapper>
-              <label for="password">Password</label>
-              <input type="password" placeholder="Create a password" />
-            </InputWrapper>
-            <button type="submit">Create account</button>
+            <input
+              type="email"
+              value={email}
+              placeholder="Email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              value={password}
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button type="button" onClick={handleSignup}>
+              Sign Up
+            </button>
           </SignUpForm>
         </div>
       </Container>

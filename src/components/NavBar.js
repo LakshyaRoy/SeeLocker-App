@@ -2,6 +2,7 @@ import React from "react";
 import LockIcon from "../files/lock.png";
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Content = styled.figure`
   display: flex;
@@ -37,6 +38,33 @@ const Content = styled.figure`
   }
 `;
 const NavBar = ({ page }) => {
+  const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      // Send a POST request to the server to logout the user
+      await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/user/logout`,
+        {},
+        {
+          headers: {
+            Authorization: `${token}`,
+          },
+        }
+      );
+      // After successful logout, remove the token from localStorage
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+
+      // Redirect the user to the login page
+      // successNoty.show();
+      window.location.href = "/";
+    } catch (error) {
+      // If logout fails, handle the error here
+      // errorNoty.show();
+      console.error("Logout failed:", error);
+    }
+  };
+
   const Button = () => {
     if (page === "login") {
       return (
@@ -45,7 +73,11 @@ const NavBar = ({ page }) => {
         </Link>
       );
     } else if (page === "dashboard") {
-      return <button>Log Out</button>;
+      return (
+        <button type="button" onClick={handleLogout}>
+          Logout!
+        </button>
+      );
     } else if (page === "signup") {
       return (
         <Link to={"/login"}>
@@ -54,7 +86,6 @@ const NavBar = ({ page }) => {
       );
     }
   };
-  console.log(page);
 
   return (
     <Content>

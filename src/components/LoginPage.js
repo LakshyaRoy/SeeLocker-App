@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import NavBar from "./NavBar";
+import axios from "axios";
 
 const Container = styled.div`
   width: 40%;
@@ -74,15 +75,59 @@ const SignUpForm = styled.form`
 `;
 
 const LoginPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      // Send a POST request to the server with email and password
+      const response = await axios.post(
+        `${process.env.REACT_APP_SERVER_URL}/user/login`,
+        {
+          email,
+          password,
+        }
+      );
+
+      // If login is successful, the server will send back a token and userId in the response
+      const token = response.data.token;
+      const userId = response.data.userId;
+
+      // Save the token in local storage or a cookie for future authenticated requests
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", userId);
+
+      // Redirect to the home page
+      // successNoty.show();
+      window.location.href = "/dashboard";
+    } catch (error) {
+      // If login fails, show the error
+      // errorNoty.show();
+      console.error("Login failed:", error);
+    }
+  };
+
   return (
     <>
       <NavBar page="login" />
       <Container>
         <BoldText>Login to your account</BoldText>
         <SignUpForm>
-          <input type="text" title="username" placeholder="username" />
-          <input type="password" title="password" placeholder="password" />
-          <button type="submit">Login</button>
+          <input
+            type="email"
+            value={email}
+            placeholder="user@gmail.com"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <input
+            type="password"
+            value={password}
+            placeholder="user123"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button type="button" onClick={handleLogin}>
+            Login
+          </button>
         </SignUpForm>
       </Container>
     </>
