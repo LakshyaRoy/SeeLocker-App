@@ -9,6 +9,10 @@ const schema=mongoose.Schema({
         type: String,
         require: true,
     },
+    iv: {
+        type: String,
+        require: true,
+    },
     // userId: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: "User",
