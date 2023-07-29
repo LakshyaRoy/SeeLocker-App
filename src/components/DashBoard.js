@@ -1,7 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import NavBar from "./NavBar";
 import { styled } from "styled-components";
 import { EyeFilled, EyeInvisibleFilled, DeleteFilled } from "@ant-design/icons";
+import axios from "axios";
+import fetchApi from "../utils/fetchApi";
+import { Navigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -146,24 +149,66 @@ const InnerPasswordFields = styled.form`
 const DashBoard = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [hashedpassword, setHashedPassword] = useState("");
+  const [itemId, setItemId] = useState("");
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const [data, setData] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
-  const inputRef = useRef();
-  const inputReff = useRef();
-  const [show, setShow] = useState(false);
-
-  const handleView = () => {
-    if (
-      inputRef.current.type === "password" ||
-      inputReff.current.type === "password"
-    ) {
-      inputRef.current.type = "text";
-      inputReff.current.type = "text";
-      setShow(true);
+  // Check if the user is logged in on component mount
+  useEffect(() => {
+    if (!token) {
+      // If the token doesn't exist, the user is not logged in, set isLoggedIn to false
+      setIsLoggedIn(false);
     } else {
-      inputRef.current.type = "password";
-      inputReff.current.type = "password";
-      setShow(false);
+      // If the token exists, the user is logged in, set isLoggedIn to true
+      setIsLoggedIn(true);
+
+      // Get all notes from the database and store them in state
+      fetchApi
+        .get("/api/getpasswords")
+        .then((res) => {
+          setData(res.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching notes:", error);
+        });
     }
+  }, [data]); // Empty dependency array ensures the effect runs only once on component mount
+
+  // If the user is not logged in, redirect to the login page
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+
+  const handleView = (password, iv, id) => {
+    const newItem = {
+      password,
+      iv,
+      id,
+    };
+    fetchApi
+      .post("/api/decryptpassword", newItem)
+      .then((res) => {
+        setItemId(id);
+        setHashedPassword(res.data.password);
+      })
+      .catch();
+  };
+  const addPassword = () => {
+    const newItem = {
+      name,
+      password,
+      userId,
+    };
+    fetchApi.post("/api/addPassword", newItem).then().catch();
+  };
+  const onDelete = (id) => {
+    fetchApi
+      .delete("/api/password/" + id)
+      .then()
+      .catch();
   };
 
   return (
@@ -175,7 +220,7 @@ const DashBoard = () => {
             <input
               type="name"
               value={name}
-              placeholder="Enter Password Name "
+              placeholder="Enter Password Name"
               autoComplete="on"
               onChange={(e) => setName(e.target.value)}
             />
@@ -188,42 +233,22 @@ const DashBoard = () => {
             />
             <p>Click here! To Generate Random Password </p>
 
-            <button>Save Password</button>
+            <button onClick={addPassword}>Save Password</button>
           </PasswordForm>
         </Bubble>
         <PasswordFields>
-          <InnerPasswordFields>
-            <span>Instagram</span>
-            <input
-              type="password"
-              autoComplete="on"
-              placeholder="Password"
-              readOnly
-              value="lakshya"
-              ref={inputRef}
-            />
-            <span onClick={handleView}>
-              {show ? <EyeFilled /> : <EyeInvisibleFilled />}
-            </span>
-            <DeleteFilled />
-            {/* <button>Delete</button> */}
-          </InnerPasswordFields>
-          <InnerPasswordFields>
-            <span>Linkedin</span>
-            <input
-              type="password"
-              autoComplete="on"
-              placeholder="Password"
-              readOnly
-              value="lakshya"
-              ref={inputReff}
-            />
-            <span onClick={handleView}>
-              {show ? <EyeFilled /> : <EyeInvisibleFilled />}
-            </span>
-            <DeleteFilled />
-            {/* <button>Delete</button> */}
-          </InnerPasswordFields>
+          {data.map((item) => (
+            <InnerPasswordFields key={item._id}>
+              <span>{item.name}</span>
+              <span>{itemId===item._id ? hashedpassword : "********"}</span>
+              <span
+                onClick={() => handleView(item.password, item.iv, item._id)}
+              >
+                <EyeFilled /> : <EyeInvisibleFilled />
+              </span>
+              <DeleteFilled onClick={() => onDelete(item._id)} />
+            </InnerPasswordFields>
+          ))}
         </PasswordFields>
       </Container>
     </div>
