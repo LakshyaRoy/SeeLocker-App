@@ -1,9 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const crypto = require("crypto");
 const port = 8000 || process.env.PORT;
-const Password = require("./models/password-model");
 
 const app = express();
 require("dotenv").config();

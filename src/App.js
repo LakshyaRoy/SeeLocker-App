@@ -1,28 +1,14 @@
 import React from "react";
-// import Axios from "axios";
-import HomePage from "./components/HomePage";
-
-import "./App.css";
-import DashBoard from "./components/DashBoard";
 import { BrowserRouter, Route } from "react-router-dom";
-
 import { Routes } from "react-router-dom";
+import "./App.css";
+
+import HomePage from "./components/HomePage";
+import DashBoard from "./components/DashBoard";
 import LoginPage from "./components/LoginPage";
 import Signup from "./components/Signup";
 
 const App = () => {
-  // const [name, setName] = useState("");
-  // const [password, setPassword] = useState("");
-
-  // const handleClick = () => {
-  //   Axios.post("http://localhost:8000/addPassword", {
-  //     name,
-  //     password,
-  //   })
-  //     .then((res) => console.log("Posted!", res))
-  //     .catch((err) => console.log(err));
-  // };
-
   return (
     <BrowserRouter>
       <Routes>

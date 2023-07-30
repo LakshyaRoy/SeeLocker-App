@@ -120,10 +120,6 @@ const SignUpForm = styled.form`
     }
   }
 `;
-// const InputWrapper = styled.div`
-//   display: flex;
-//   flex-direction: column;
-// `;
 
 const Signup = () => {
   const [email, setEmail] = useState("");
@@ -132,13 +128,10 @@ const Signup = () => {
   const handleSignup = async () => {
     try {
       // Send a POST request to the server with email and password
-      const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/user/signup`,
-        {
-          email,
-          password,
-        }
-      );
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/signup`, {
+        email,
+        password,
+      });
       // Redirect to the login page after successful sign-up
       window.location.href = "/login";
     } catch (error) {

@@ -77,7 +77,7 @@ router.route("/getrandom").get((req, res) => {
 
   // Example usage
   const randomPassword = generateRandomPassword(12); // Generate a random password of length 12
-  res.json({ "password": randomPassword });
+  res.json({ password: randomPassword });
 });
 
 router.route("/password/:Id").delete(authMiddleware, (req, res) => {
@@ -89,17 +89,5 @@ router.route("/password/:Id").delete(authMiddleware, (req, res) => {
       res.status(400).json({ message: "Error in fetching", error: err })
     );
 });
-//   .put((req, res) => {
-//     Password.findByIdAndUpdate(req.params.Id).then((item) => {
-//         item.name = req.body.name;
-//         item.password = req.body.password;
-//         item
-//         .save()
-//         .then(() => res.json({ message: "Successfully updated!" }))
-//         .catch((err) =>
-//           res.status(400).json({ message: "Error in updating!", error: err })
-//         );
-//     });
-//   });
 
 module.exports = router;
