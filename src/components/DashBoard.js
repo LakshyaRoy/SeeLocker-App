@@ -101,9 +101,20 @@ const InnerPasswordFields = styled.form`
   border-radius: 10px;
   gap: 10px;
   margin-top: 20px;
-  span {
+  margin-bottom: 20px;
+  width: 360px;
+  height: 50px;
+
+  .justGap {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  p {
     color: #663405;
-    font-size: 20px;
+    font-size: 18px;
     font-family: "Poppins", sans-serif;
     cursor: pointer;
   }
@@ -174,23 +185,23 @@ const DashBoard = () => {
           console.error("Error fetching notes:", error);
         });
     }
-  }, [data,token]); // Empty dependency array ensures the effect runs only once on component mount
+  }, [data, token]); // Empty dependency array ensures the effect runs only once on component mount
 
   // If the user is not logged in, redirect to the login page
   if (!isLoggedIn) {
     return <Navigate to="/login" />;
   }
 
-  const generateRandomPassword=()=>{
+  const generateRandomPassword = () => {
     fetchApi
-    .get("/api/getrandom")
-    .then((res) => {
-      setPassword(res.data.password);
-    })
-    .catch((error) => {
-      console.error("Error decrypting password:", error);
-    });
-  }
+      .get("/api/getrandom")
+      .then((res) => {
+        setPassword(res.data.password);
+      })
+      .catch((error) => {
+        console.error("Error decrypting password:", error);
+      });
+  };
   const handleView = (password, iv, id) => {
     if (itemId === id) {
       // If item ID is the same, hide the password
@@ -258,14 +269,16 @@ const DashBoard = () => {
         <PasswordFields>
           {data.map((item) => (
             <InnerPasswordFields key={item._id}>
-              <span>{item.name}</span>
-              <span>{itemId === item._id ? hashedpassword : "********"}</span>
-              <span
-                onClick={() => handleView(item.password, item.iv, item._id)}
-              >
-                {itemId !== item._id ? <EyeFilled /> : <EyeInvisibleFilled />}
-              </span>
-              <DeleteFilled onClick={() => onDelete(item._id)} />
+              <p>{item.name}</p>
+              <p>{itemId === item._id ? hashedpassword : "********"}</p>
+              <p className="justGap">
+                <span
+                  onClick={() => handleView(item.password, item.iv, item._id)}
+                >
+                  {itemId !== item._id ? <EyeFilled /> : <EyeInvisibleFilled />}
+                </span>
+                <DeleteFilled onClick={() => onDelete(item._id)} />
+              </p>
             </InnerPasswordFields>
           ))}
         </PasswordFields>
