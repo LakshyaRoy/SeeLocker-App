@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import NavBar from "./NavBar";
 import axios from "axios";
+import Noty from "noty";
+import "noty/lib/noty.css";
+import "noty/lib/themes/semanticui.css";
 
 const Container = styled.div`
   display: grid;
@@ -125,6 +128,20 @@ const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Noty js notification
+  const successNoty = new Noty({
+    text: "Signup Successful!",
+    type: "success",
+    theme: "semanticui",
+    timeout: 3000,
+  });
+  const errorNoty = new Noty({
+    text: "Error, Try again!",
+    type: "error",
+    theme: "semanticui",
+    timeout: 3000,
+  });
+
   const handleSignup = async () => {
     try {
       // Send a POST request to the server with email and password
@@ -133,9 +150,11 @@ const Signup = () => {
         password,
       });
       // Redirect to the login page after successful sign-up
+      successNoty.show();
       window.location.href = "/login";
     } catch (error) {
-      // If sign-up fails, print the error
+      // If sign-up fails, show the error
+      errorNoty.show();
       console.error("Sign-up failed:", error);
     }
   };
