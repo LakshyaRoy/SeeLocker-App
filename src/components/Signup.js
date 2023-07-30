@@ -52,6 +52,9 @@ const TagLine = styled.h1`
   margin: 0;
   font-weight: 200;
 `;
+const Content = styled.div`
+  position: relative;
+`;
 
 const SignUpForm = styled.form`
   grid-area: main;
@@ -63,6 +66,10 @@ const SignUpForm = styled.form`
   gap: 16px;
   background-color: #a9a3a0;
   border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   input {
     width: 320px;
@@ -72,7 +79,7 @@ const SignUpForm = styled.form`
     outline: 2px solid #663405;
     padding-left: 10px;
     font-size: 20px;
-    background-color: #edbdab;
+    background-color: rgba(255, 255, 255, 0.4);
     color: black;
     font-family: "Poppins", sans-serif;
     transition: all ease 0.3s;
@@ -105,7 +112,7 @@ const SignUpForm = styled.form`
     font-family: "Poppins", sans-serif;
     transition: all ease 0.3s;
     &:hover {
-      background-color: #edbdab;
+      background-color: rgba(255, 255, 255, 0.4);
       color: black;
       cursor: pointer;
       box-shadow: inset -8px -7px 9px rgba(0, 0, 0, 0.25);
@@ -132,7 +139,6 @@ const Signup = () => {
           password,
         }
       );
-
       // Redirect to the login page after successful sign-up
       window.location.href = "/login";
     } catch (error) {
@@ -151,7 +157,7 @@ const Signup = () => {
             alt="girl-reading-a-book"
           />
         </Image>
-        <div>
+        <Content>
           <SignUpForm>
             <TagLine>Save your next Password Here!</TagLine>
             <input
@@ -170,7 +176,7 @@ const Signup = () => {
               Sign Up
             </button>
           </SignUpForm>
-        </div>
+        </Content>
       </Container>
     </>
   );
