@@ -73,7 +73,7 @@ router.post("/logout", (req, res) => {
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
 
     // The token is valid, but will mark it as expired by setting its expiration to the current time
-    const expiredToken = jwt.sign(
+    jwt.sign(
       { userId: decodedToken.userId },
       process.env.SECRET_KEY,
       {

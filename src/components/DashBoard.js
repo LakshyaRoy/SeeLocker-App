@@ -250,7 +250,7 @@ const DashBoard = () => {
               autoComplete="on"
               onChange={(e) => setPassword(e.target.value)}
             />
-            <p onClick={generateRandomPassword}>Click here! To Generate Random Password </p>
+            <p onClick={generateRandomPassword}>Click here to Generate Random Password </p>
 
             <button onClick={addPassword}>Save Password</button>
           </PasswordForm>
