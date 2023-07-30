@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import Axios from "axios";
 import HomePage from "./components/HomePage";
 
@@ -36,23 +36,3 @@ const App = () => {
 };
 
 export default App;
-
-{
-  /* <form>
-        <input
-          type="name"
-          value={name}
-          placeholder="Password Title"
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="password"
-          value={password}
-          placeholder="password"
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="button" onClick={handleClick}>
-          Save
-        </button>
-      </form> */
-}
