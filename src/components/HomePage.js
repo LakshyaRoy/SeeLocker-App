@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import LockIcon from "../files/lock.png";
 import WorkImage from "../files/image.jpg";
 import { Link } from "react-router-dom";
+import Footer from "./Footer";
 
 const Container = styled.div`
   display: grid;
@@ -148,30 +149,32 @@ const Photo = styled.div`
 
 const HomePage = () => {
   return (
-    <Container>
-      <ContentWrapper>
-        <Content>
-          <img src={LockIcon} alt="LockIcon" />
-          <blockquote>See Locker</blockquote>
-        </Content>
-        <div className="content2">
-          <Text> Ensures your privacy and keeps you away from Chaos.</Text>
+    <>
+      <Container>
+        <ContentWrapper>
+          <Content>
+            <img src={LockIcon} alt="LockIcon" />
+            <blockquote>See Locker</blockquote>
+          </Content>
+          <div className="content2">
+            <Text> Ensures your privacy and keeps you away from Chaos.</Text>
 
-          <ButtonWrapper>
-            <Link to="/login">
-              <button className="btn1">Login</button>
-            </Link>
-            <Link to="/signup">
-              <button className="btn2">Sign Up</button>
-            </Link>
-          </ButtonWrapper>
-        </div>
-      </ContentWrapper>
+            <ButtonWrapper>
+              <Link to="/login">
+                <button className="btn1">Login</button>
+              </Link>
+              <Link to="/signup">
+                <button className="btn2">Sign Up</button>
+              </Link>
+            </ButtonWrapper>
+          </div>
+        </ContentWrapper>
 
-      <Photo>
-        <img src={WorkImage} alt="" width="550px" height="650px" />
-      </Photo>
-    </Container>
+        <Photo>
+          <img src={WorkImage} alt="" width="550px" height="650px" />
+        </Photo>
+      </Container>
+    </>
   );
 };
 

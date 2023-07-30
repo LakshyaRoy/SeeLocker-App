@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import NavBar from "./NavBar";
 import axios from "axios";
+import Footer from "./Footer";
 
 const Container = styled.div`
   display: grid;
@@ -178,6 +179,7 @@ const Signup = () => {
           </SignUpForm>
         </Content>
       </Container>
+      <Footer />
     </>
   );
 };
