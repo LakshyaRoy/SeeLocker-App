@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+<h1 align="center">SeeLocker App</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SeeLocker is a powerful password manager app designed to make password management effortless and secure. With SeeLocker, you can say goodbye to the hassle of remembering multiple passwords and confidently store your login credentials in one centralized location. The app offers a range of features to simplify your password management experience, ensuring that your data remains safe and easily accessible.
 
-## Available Scripts
+## Key Features
 
-In the project directory, you can run:
+- **Secure Password Storage**: SeeLocker utilizes strong cryptographic algorithms to encrypt and store your passwords securely, protecting them from unauthorized access.
 
-### `npm start`
+- **Password Generation**: Generate strong and complex passwords with just a click. SeeLocker's password generator ensures that you have unique and robust passwords for every account.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Intuitive User Interface**: The app boasts an intuitive and user-friendly interface, making it easy for users of all levels to navigate and manage their passwords effectively.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Add and Delete Passwords**: Easily add new passwords and organize them into categories for seamless access. You can also delete passwords that are no longer needed.
 
-### `npm test`
+- **Authentication and Authorization**: SeeLocker employs bcrypt for secure user authentication and JWT (JSON Web Tokens) for session management, ensuring that only authorized users can access their passwords.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Technologies Used
 
-### `npm run build`
+- Frontend: React.js, Styled-Components Library
+- Backend: Express.js, Node.js
+- Authentication: bcrypt, JWT (JSON Web Tokens)
+- Password Encryption: Crypto package
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<!-- ## Demo -->
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<!-- Access the live demo of the SeeLocker app at [https://seelockerapp.com](https://seelockerapp.com) -->
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<!-- ## Screenshots -->
 
-### `npm run eject`
+<!-- ![SeeLocker App Screenshot 1]() -->
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Known Issues
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Sometimes, the password generator may produce passwords that do not meet specific website requirements. We are working on improving the password generation algorithm.
+- There are some minor issues with UI. We would to looking to further improve the UI specially at home page to enhance user experience.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Contributing
+We welcome contributions from the community. If you would like to contribute to the project, please follow these steps:
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them with descriptive messages.
+4. Push your changes to your forked repository.
+5. Submit a pull request to the main repository.
 
-## Learn More
+## License
+This Project has been made during HackBattle Hackathon  by our team members. Any resemblance is unintentional and we apologize for the same.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Credits
+Resources that we used while working on this project:
+- ChatGPT by OpenAI
+- npm Documentation (https://docs.npmjs.com/)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+We hope you find SeeLocker App useful and efficient in managing your passwords securely. For any queries or feedback, please reach out to us at mayankbansal125@gmail.com. Happy password management!
