@@ -8,3 +8,7 @@ body {
   background-color: #1c1b17;
   height: 100%;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

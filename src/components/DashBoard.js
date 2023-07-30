@@ -3,6 +3,9 @@ import { styled } from "styled-components";
 import { EyeFilled, EyeInvisibleFilled, DeleteFilled } from "@ant-design/icons";
 import fetchApi from "../utils/fetchApi";
 import { Navigate } from "react-router-dom";
+import Noty from "noty";
+import "noty/lib/noty.css";
+import "noty/lib/themes/semanticui.css";
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 
@@ -167,6 +170,26 @@ const DashBoard = () => {
   const [data, setData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
+  // Noty js notification
+  const successAdd = new Noty({
+    text: "Successfully Added!",
+    type: "success",
+    theme: "semanticui",
+    timeout: 3000,
+  });
+  const successDel = new Noty({
+    text: "Password Deleted!",
+    type: "success",
+    theme: "semanticui",
+    timeout: 3000,
+  });
+  const errorNoty = new Noty({
+    text: "There's some issue,try again!",
+    type: "error",
+    theme: "semanticui",
+    timeout: 3000,
+  });
+
   // Check if the user is logged in on component mount
   useEffect(() => {
     if (!token) {
@@ -233,13 +256,16 @@ const DashBoard = () => {
       password,
       userId,
     };
-    fetchApi.post("/api/addPassword", newItem).then().catch();
+    fetchApi
+      .post("/api/addPassword", newItem)
+      .then(() => successAdd.show())
+      .catch(() => errorNoty.show());
   };
   const onDelete = (id) => {
     fetchApi
       .delete("/api/password/" + id)
-      .then()
-      .catch();
+      .then(() => successDel.show())
+      .catch(() => errorNoty.show());
   };
 
   return (
@@ -263,7 +289,7 @@ const DashBoard = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <p onClick={generateRandomPassword}>
-              Click here! To Generate Random Password{" "}
+              Click here to Generate Random Password{" "}
             </p>
 
             <button onClick={addPassword}>Save Password</button>

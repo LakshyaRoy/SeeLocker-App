@@ -3,6 +3,9 @@ import LockIcon from "../files/lock.png";
 import { styled } from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Noty from "noty";
+import "noty/lib/noty.css";
+import "noty/lib/themes/semanticui.css";
 
 const Content = styled.figure`
   display: flex;
@@ -43,7 +46,22 @@ const Content = styled.figure`
     text-decoration: none;
   }
 `;
+
 const NavBar = ({ page }) => {
+  // Noty js notification
+  const successNoty = new Noty({
+    text: "Logout Successful!",
+    type: "success",
+    theme: "semanticui",
+    timeout: 3000,
+  });
+  const errorNoty = new Noty({
+    text: "Error, Try again!",
+    type: "error",
+    theme: "semanticui",
+    timeout: 3000,
+  });
+  
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -62,11 +80,11 @@ const NavBar = ({ page }) => {
       localStorage.removeItem("userId");
 
       // Redirect the user to the login page
-      // successNoty.show();
+      successNoty.show();
       window.location.href = "/";
     } catch (error) {
-      // If logout fails, handle the error here
-      // errorNoty.show();
+      // If logout fails, show the error here
+      errorNoty.show();
       console.error("Logout failed:", error);
     }
   };

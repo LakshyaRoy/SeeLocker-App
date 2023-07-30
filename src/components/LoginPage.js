@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import NavBar from "./NavBar";
 import axios from "axios";
+import Noty from "noty";
+import "noty/lib/noty.css";
+import "noty/lib/themes/semanticui.css";
 import Footer from "./Footer";
 
 const ContainerWrapper = styled.div`
@@ -87,6 +90,20 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Noty js notification
+  const successNoty = new Noty({
+    text: "Login Successful!",
+    type: "success",
+    theme: "semanticui",
+    timeout: 3000,
+  });
+  const errorNoty = new Noty({
+    text: "Incorrect email or password!",
+    type: "error",
+    theme: "semanticui",
+    timeout: 3000,
+  });
+
   const handleLogin = async () => {
     try {
       // Send a POST request to the server with email and password
@@ -107,11 +124,11 @@ const LoginPage = () => {
       localStorage.setItem("userId", userId);
 
       // Redirect to the home page
-      // successNoty.show();
+      successNoty.show();
       window.location.href = "/dashboard";
     } catch (error) {
       // If login fails, show the error
-      // errorNoty.show();
+      errorNoty.show();
       console.error("Login failed:", error);
     }
   };
