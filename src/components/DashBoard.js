@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "./NavBar";
 import { styled } from "styled-components";
 import { EyeFilled, EyeInvisibleFilled, DeleteFilled } from "@ant-design/icons";
 import fetchApi from "../utils/fetchApi";
 import { Navigate } from "react-router-dom";
+import Footer from "./Footer";
+import NavBar from "./NavBar";
 
 const Container = styled.div`
   display: flex;
@@ -285,6 +286,7 @@ const DashBoard = () => {
           ))}
         </PasswordFields>
       </Container>
+      <Footer />
     </div>
   );
 };
