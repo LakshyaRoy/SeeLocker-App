@@ -3,20 +3,24 @@ import { styled } from "styled-components";
 import NavBar from "./NavBar";
 import axios from "axios";
 import Noty from "noty";
-import 'noty/lib/noty.css';
+import "noty/lib/noty.css";
 import "noty/lib/themes/semanticui.css";
+import Footer from "./Footer";
 
 const ContainerWrapper = styled.div`
-  position: relative;
   width: 100%;
-  top: 8rem;
+  height: calc(100vh - 177px);
+  position: relative;
 `;
 
 const Container = styled.div`
   width: 40%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   min-width: 320px;
   max-width: 475px;
-  margin: 2.5% auto 0 auto;
   padding: 20px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
   background-color: #edbdab;
@@ -53,7 +57,7 @@ const SignUpForm = styled.form`
     padding-left: 10px;
     font-size: 20px;
     background-color: #edbdab;
-    color: white;
+    color: #663405;
     font-family: "Poppins", sans-serif;
     transition: all ease 0.3s;
     &:focus {
@@ -154,6 +158,7 @@ const LoginPage = () => {
           </SignUpForm>
         </Container>
       </ContainerWrapper>
+      <Footer />
     </>
   );
 };

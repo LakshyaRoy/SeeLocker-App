@@ -5,6 +5,7 @@ import axios from "axios";
 import Noty from "noty";
 import "noty/lib/noty.css";
 import "noty/lib/themes/semanticui.css";
+import Footer from "./Footer";
 
 const Container = styled.div`
   display: grid;
@@ -190,6 +191,7 @@ const Signup = () => {
           </SignUpForm>
         </Content>
       </Container>
+      <Footer />
     </>
   );
 };
