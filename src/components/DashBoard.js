@@ -167,8 +167,6 @@ const DashBoard = () => {
   const [password, setPassword] = useState("");
   const [hashedpassword, setHashedPassword] = useState("");
   const [itemId, setItemId] = useState("");
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("userId");
   const [data, setData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
@@ -192,6 +190,9 @@ const DashBoard = () => {
     timeout: 3000,
   });
 
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+
   // Check if the user is logged in on component mount
   useEffect(() => {
     if (!token) {
@@ -211,7 +212,7 @@ const DashBoard = () => {
           console.error("Error fetching notes:", error);
         });
     }
-  }, [data, token]); // Empty dependency array ensures the effect runs only once on component mount
+  }, [data]); // Empty dependency array ensures the effect runs only once on component mount
 
   // If the user is not logged in, redirect to the login page
   if (!isLoggedIn) {

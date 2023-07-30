@@ -39,7 +39,7 @@ router.route("/addPassword").post(authMiddleware, (req, res) => {
 
   newPassword
     .save()
-    .then((result) => {
+    .then(() => {
       res.status(200).json("Successfully created!");
     })
     .catch((err) => {
