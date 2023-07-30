@@ -3,6 +3,12 @@ import { styled } from "styled-components";
 import NavBar from "./NavBar";
 import axios from "axios";
 
+const ContainerWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  top: 8rem;
+`;
+
 const Container = styled.div`
   width: 40%;
   min-width: 320px;
@@ -12,7 +18,6 @@ const Container = styled.div`
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
   background-color: #edbdab;
   border-radius: 10px;
-  position: relative;
 `;
 const BoldText = styled.h1`
   width: 100%;
@@ -110,26 +115,28 @@ const LoginPage = () => {
   return (
     <>
       <NavBar page="login" />
-      <Container>
-        <BoldText>Login to your account</BoldText>
-        <SignUpForm>
-          <input
-            type="email"
-            value={email}
-            placeholder="user@gmail.com"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            value={password}
-            placeholder="user123"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="button" onClick={handleLogin}>
-            Login
-          </button>
-        </SignUpForm>
-      </Container>
+      <ContainerWrapper>
+        <Container>
+          <BoldText>Login to your account</BoldText>
+          <SignUpForm>
+            <input
+              type="email"
+              value={email}
+              placeholder="user@gmail.com"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              value={password}
+              placeholder="user123"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button type="button" onClick={handleLogin}>
+              Login
+            </button>
+          </SignUpForm>
+        </Container>
+      </ContainerWrapper>
     </>
   );
 };
