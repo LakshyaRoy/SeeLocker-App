@@ -6,6 +6,7 @@ const authMiddleware = require("../middlewares/auth");
 const crypto = require("crypto");
 const Password = require("../models/password-model");
 
+// Fetching all saved passwords for logged-in user
 router.route("/getpasswords").get(authMiddleware, async (req, res) => {
   try {
     // Fetch notes from the database based on the userId
@@ -16,6 +17,7 @@ router.route("/getpasswords").get(authMiddleware, async (req, res) => {
   }
 });
 
+// For saving the password 
 router.route("/addPassword").post(authMiddleware, (req, res) => {
   const { name, password } = req.body;
 
@@ -45,6 +47,7 @@ router.route("/addPassword").post(authMiddleware, (req, res) => {
     });
 });
 
+// For Decrypting the password
 router.route("/decryptpassword").post(authMiddleware, (req, res) => {
   // Decrypt the password for showing the user
   const { password, iv } = req.body;
@@ -61,6 +64,7 @@ router.route("/decryptpassword").post(authMiddleware, (req, res) => {
   res.json({ password: decrypted });
 });
 
+// Route to get a random password
 router.route("/getrandom").get((req, res) => {
   // Generate a random password of the specified length
   function generateRandomPassword(length) {
@@ -80,6 +84,7 @@ router.route("/getrandom").get((req, res) => {
   res.json({ password: randomPassword });
 });
 
+// Deleting the saved password
 router.route("/password/:Id").delete(authMiddleware, (req, res) => {
   Password.findByIdAndDelete(req.params.Id)
     .then(() => {

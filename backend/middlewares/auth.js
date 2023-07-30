@@ -1,3 +1,5 @@
+// auth.js for protecting the routes and checking if the user is logged in or not
+
 const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {

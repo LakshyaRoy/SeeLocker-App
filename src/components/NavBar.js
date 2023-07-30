@@ -1,3 +1,5 @@
+// Navbar.js for navbar in all pages...also containing logic for displaying specific button depending on viewing page
+
 import React from "react";
 import LockIcon from "../files/lock.png";
 import { styled } from "styled-components";
@@ -61,7 +63,7 @@ const NavBar = ({ page }) => {
     theme: "semanticui",
     timeout: 3000,
   });
-  
+
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem("token");

@@ -1,3 +1,5 @@
+// Footer.js for footer component in all pages
+
 import React from "react";
 
 import { styled } from "styled-components";

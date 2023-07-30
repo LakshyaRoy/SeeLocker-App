@@ -1,9 +1,10 @@
+// HomePage.js for HomePage displayed when user visits the site
+
 import React from "react";
 import { styled } from "styled-components";
 import LockIcon from "../files/lock.png";
 import WorkImage from "../files/image.jpg";
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
 
 const Container = styled.div`
   display: grid;
