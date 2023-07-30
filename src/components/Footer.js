@@ -31,8 +31,8 @@ const Footer = () => {
   return (
     <div>
       <FooterMain>
-        <FooterWrapper class="footer-container">
-          <InnerFooterWrapper class="footer-content">
+        <FooterWrapper className="footer-container">
+          <InnerFooterWrapper className="footer-content">
             <p>
               Securely store and manage your passwords with our SeeLocker App.
               Safeguard your digital life with ease and peace of mind.

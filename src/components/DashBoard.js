@@ -190,29 +190,29 @@ const DashBoard = () => {
     timeout: 3000,
   });
 
+  const fetchPasswords = () => {
+    fetchApi
+      .get("/api/getpasswords")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching passwords:", error);
+      });
+  };
+
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
 
-  // Check if the user is logged in on component mount
+  // Move the fetchPasswords function inside useEffect to avoid cluttering the scope
   useEffect(() => {
     if (!token) {
-      // If the token doesn't exist, the user is not logged in, set isLoggedIn to false
       setIsLoggedIn(false);
     } else {
-      // If the token exists, the user is logged in, set isLoggedIn to true
       setIsLoggedIn(true);
-
-      // Get all notes from the database and store them in state
-      fetchApi
-        .get("/api/getpasswords")
-        .then((res) => {
-          setData(res.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching notes:", error);
-        });
+      fetchPasswords(); // Fetch passwords when the component mounts
     }
-  }, [data]); // Empty dependency array ensures the effect runs only once on component mount
+  }, [token, data]); // Add data to the dependency array to run the effect when data changes
 
   // If the user is not logged in, redirect to the login page
   if (!isLoggedIn) {
@@ -261,14 +261,38 @@ const DashBoard = () => {
     };
     fetchApi
       .post("/api/addPassword", newItem)
-      .then(() => successAdd.show())
-      .catch(() => errorNoty.show());
+      .then((res) => {
+        if (res.status === 200) {
+          // Password successfully added, show success message
+          successAdd.show();
+
+          // Now fetch the updated passwords from the server
+          fetchPasswords();
+        } else {
+          // If the response status code is not 200, show an error message
+          errorNoty.show();
+        }
+      })
+      .catch((error) => {
+        // Error occurred while adding the password, show error message
+        errorNoty.show();
+      });
   };
+
   const onDelete = (id) => {
     fetchApi
       .delete("/api/password/" + id)
-      .then(() => successDel.show())
-      .catch(() => errorNoty.show());
+      .then(() => {
+        // Password successfully deleted, show success message
+        successDel.show();
+
+        // Now fetch the updated passwords from the server
+        fetchPasswords();
+      })
+      .catch(() => {
+        // Error occurred while deleting the password, show error message
+        errorNoty.show();
+      });
   };
 
   return (
