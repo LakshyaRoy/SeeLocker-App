@@ -21,6 +21,9 @@ const Content = styled.figure`
     position: absolute;
     top: 16px;
     left: 68px;
+    color: #edbdab;
+    font-weight: 200;
+    text-align: left;
   }
 
   button {
@@ -35,6 +38,9 @@ const Content = styled.figure`
     &:hover {
       background-color: #edbdab;
     }
+  }
+  Link {
+    text-decoration: none;
   }
 `;
 const NavBar = ({ page }) => {
@@ -89,8 +95,18 @@ const NavBar = ({ page }) => {
 
   return (
     <Content>
-      <img src={LockIcon} alt="LockIcon" />
-      <blockquote>See Locker</blockquote>
+      {page === "dashboard" ? (
+        <Link to="/dashboard">
+          <img src={LockIcon} alt="LockIcon" />
+          <blockquote>See Locker</blockquote>
+        </Link>
+      ) : (
+        <Link to="/">
+          <img src={LockIcon} alt="LockIcon" />
+          <blockquote>See Locker</blockquote>
+        </Link>
+      )}
+
       <div>{Button()}</div>
     </Content>
   );
