@@ -21,13 +21,19 @@ SeeLocker is a powerful password manager app designed to make password managemen
 - Authentication: bcrypt, JWT (JSON Web Tokens)
 - Password Encryption: Crypto package
 
-<!-- ## Demo -->
+## Demo
 
-<!-- Access the live demo of the SeeLocker app at [https://seelockerapp.com](https://seelockerapp.com) -->
+Access the live demo of the SeeLocker app at [https://see-locker-app.vercel.app/](https://see-locker-app.vercel.app/)
 
-<!-- ## Screenshots -->
+## Screenshots
 
-<!-- ![SeeLocker App Screenshot 1]() -->
+![HomePage](https://res.cloudinary.com/dwuyp1nss/image/upload/v1690722936/Website%20Demo/HomePage_ifveed.png)
+![SignUp](https://res.cloudinary.com/dwuyp1nss/image/upload/v1690722936/Website%20Demo/Signup_knx13x.png)
+![Login](https://res.cloudinary.com/dwuyp1nss/image/upload/v1690722935/Website%20Demo/Login_wg7jwh.png)
+![Dashboard](https://res.cloudinary.com/dwuyp1nss/image/upload/v1690722935/Website%20Demo/Dashboard_r4dlpe.png)
+![Dashboard](https://res.cloudinary.com/dwuyp1nss/image/upload/v1690722935/Website%20Demo/decrypt_tenj9y.png)
+![Deleting a password](https://res.cloudinary.com/dwuyp1nss/image/upload/v1690722935/Website%20Demo/delete_rojb3x.png)
+
 
 
 ## Known Issues
