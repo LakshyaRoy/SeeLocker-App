@@ -72,7 +72,7 @@ const ButtonWrapper = styled.div`
   gap: 40px;
   margin-top: 40px;
 
-  button:first-child {
+  .btn1 {
     background-color: #f5963d;
     color: #1c1b17;
     border: none;
@@ -85,7 +85,7 @@ const ButtonWrapper = styled.div`
     }
   }
 
-  button:last-child {
+  .btn2 {
     padding: 15px 80px;
     border-radius: 30px;
     border: 2px solid #f5963d;
@@ -99,26 +99,26 @@ const ButtonWrapper = styled.div`
   }
 
   @media screen and (max-width: 769px) {
-    button:first-child {
+    .btn1 {
       padding: 15px 50px;
     }
-    button:last-child {
+    .btn2 {
       padding: 15px 50px;
     }
   }
   @media screen and (max-width: 590px) {
-    button:first-child {
+    .btn1 {
       padding: 15px 30px;
     }
-    button:last-child {
+    .btn2 {
       padding: 15px 30px;
     }
   }
   @media screen and (max-width: 344px) {
-    button:first-child {
+    .btn1 {
       padding: 8px 20px;
     }
-    button:last-child {
+    .btn2 {
       padding: 8px 20px;
     }
   }
@@ -159,10 +159,10 @@ const HomePage = () => {
 
           <ButtonWrapper>
             <Link to="/login">
-              <button>Login</button>
+              <button className="btn1">Login</button>
             </Link>
             <Link to="/signup">
-              <button>Sign Up</button>
+              <button className="btn2">Sign Up</button>
             </Link>
           </ButtonWrapper>
         </div>
